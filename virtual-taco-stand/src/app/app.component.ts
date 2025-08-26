@@ -15,14 +15,18 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         />
       </header>
 
+      <div class="sign-in-container">
+        <a class="sign-in-link" routerLink="/signin">Sign In</a>
+      </div>
+
       <main class="main-content">
         <nav class="navbar">
           <ul>
             <li><a routerLink="/">Home</a></li>
-            <li><a href="#">Menu</a></li>
-            <li><a href="#">Order</a></li>
-            <li><a href="#">Daily Specials</a></li>
-            <li><a href="#">Feedback</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/order">Order</a></li>
+            <li><a href="/daily-specials">Daily Specials</a></li>
+            <li><a href="/feedback">Feedback</a></li>
           </ul>
         </nav>
 
@@ -32,17 +36,35 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       </main>
 
       <footer class="footer">
-        <nav class="footer nav">
+        <nav class="footer-nav">
           <a routerLink="/">Home</a>
-          <a href="#">Menu</a>
-          <a href="#">Order</a>
-          <a href="#">Daily Specials</a>
-          <a href="#">Feedback</a>
+          <a href="/menu">Menu</a>
+          <a href="/order">Order</a>
+          <a href="/daily-specials">Daily Specials</a>
+          <a href="/feedback">Feedback</a>
         </nav>
         <p>&copy; 2024 Virtual Taco Stand</p>
       </footer>
     </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      .sign-in-container {
+        text-align: center;
+        padding-right: 20px;
+        margin-top: 10px;
+      }
+
+      .sign-in-link {
+        color: #000000;
+        text-decoration: none;
+        font-family: 'Lato', sans-serif;
+      }
+
+      .sign-in-link:hover {
+        text-decoration: underline;
+      }
+    `,
+  ],
 })
 export class AppComponent {}
