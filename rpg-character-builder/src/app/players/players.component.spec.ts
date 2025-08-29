@@ -8,16 +8,23 @@ describe('PlayersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlayersComponent]
-    })
-    .compileComponents();
+      imports: [PlayersComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PlayersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  /* Chapter 3: unit tests 1 */
+  it('should create PlayersComponent', () => {
     expect(component).toBeTruthy();
+  });
+
+  /* Chapter 3: unit test 2 */
+  it('should correctly display a list of characters', () => {
+    const complied = fixture.nativeElement as HTMLElement; // Get the compiled HTML of the component
+    const playerCharacters = complied.querySelectorAll('.character'); // Get all the player characters
+    expect(playerCharacters.length).toEqual(component.players.length);
   });
 });
