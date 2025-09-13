@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -24,9 +26,22 @@ import { RouterLink, RouterOutlet } from '@angular/router';
             <li><a routerLink="/create-character">Create Character</a></li>
             <li><a routerLink="/create-guild">Create Guild</a></li>
             <li><a routerLink="/character-faction">Character Faction</a></li>
-            <li><a routerLink="/signin">Sign In</a></li>
+            @if (!email) {
+              <li>
+                <a routerLink="/signin">Sign In</a>
+              </li>
+            }
           </ul>
         </nav>
+
+        @if (email) {
+          <aside class="signin-container">
+            <h2>
+              <strong>Welcome back, {{ email }}!</strong>
+            </h2>
+            <button (click)="signout()">Sign Out</button>
+          </aside>
+        }
 
         <section class="content">
           <router-outlet />
@@ -45,6 +60,48 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       </footer>
     </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      .signin-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 3rem;
+      }
+
+      .signin-container h2 {
+        color: #bbbbbb;
+      }
+
+      aside[_ngcontent-ng-c2609321573] button[_ngcontent-ng-c2609321573] {
+        background-color: red;
+        color: white;
+        border-radius: 3px;
+        padding: 5px 30px;
+      }
+    `,
+  ],
 })
-export class AppComponent {}
+export class AppComponent {
+  email?: string;
+
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService,
+  ) {}
+
+  ngOnInit() {
+    this.authService.getAuthState().subscribe((isAuth) => {
+      if (isAuth) {
+        this.email = this.cookieService.get('session_user') || undefined;
+      } else {
+        this.email = undefined;
+      }
+    });
+  }
+
+  signout() {
+    this.email = undefined;
+    this.authService.signout();
+  }
+}
