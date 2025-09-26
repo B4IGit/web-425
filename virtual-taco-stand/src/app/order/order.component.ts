@@ -11,14 +11,16 @@ export interface Order {
   tacos: Taco[];
   orderId: number;
 }
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { OrderSummaryComponent } from '../order-summary/order-summary.component';
 
+// @ts-ignore
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, OrderSummaryComponent],
   template: `
     <div class="order-form-container">
       <form
@@ -81,35 +83,7 @@ import { CommonModule } from '@angular/common';
       </form>
 
       <div class="order-summary">
-        <h1>Order Summary</h1>
-
-        @if (order.tacos.length > 0) {
-          <ul>
-            @for (taco of order.tacos; track taco) {
-              <li>
-                <strong>{{ taco.quantity }}x {{ taco.name }}</strong>
-                <br />
-                Price per taco:
-                {{ taco.price | currency: 'USD' : 'symbol' : '1.2-2' }}
-                <br />
-                @if (taco.noOnions) {
-                  No Onions
-                  <br />
-                }
-                @if (taco.noCilantro) {
-                  No Cilantro
-                  <br />
-                }
-              </li>
-            }
-          </ul>
-          <p>
-            <strong>Total:</strong>
-            {{ getTotal() | currency: 'USD' : 'symbol' : '1.2-2' }}
-          </p>
-        } @else {
-          <p>No tacos added to the order yet.</p>
-        }
+        <app-order-summary [order]="order"></app-order-summary>
       </div>
     </div>
   `,
@@ -163,10 +137,12 @@ import { CommonModule } from '@angular/common';
         margin-right: 5px;
       }
 
+      /*
+      // Removed this form the original styling
       .order-summary li {
         margin-bottom: 10px;
         padding: 5px;
-      }
+      }*/
     `,
   ],
 })
@@ -178,6 +154,8 @@ export class OrderComponent {
   noOnions: boolean = false;
   noCilantro: boolean = false;
   orderTotal: number;
+
+  @Output() orderUpdated = new EventEmitter<Order>();
 
   constructor() {
     this.tacos = [
@@ -227,12 +205,7 @@ export class OrderComponent {
       );
     }
   }
-  getTotal() {
-    return this.order.tacos.reduce(
-      (acc, taco) => acc + taco.price * (taco.quantity ?? 1),
-      0,
-    );
-  }
+
   resetForm() {
     if (this.tacos.length > 0) {
       this.selectedTacoId = this.tacos[0].id;

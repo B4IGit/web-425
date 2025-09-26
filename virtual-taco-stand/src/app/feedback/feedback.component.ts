@@ -101,7 +101,7 @@ import {
     }
 
     .feedback-card {
-      flex: 0 0 calc(50% -20px);
+      flex: 0 0 calc(50% - 20px);
       box-sizing: border-box;
       border: 1px solid #ccc;
       border-radius: 5px;
