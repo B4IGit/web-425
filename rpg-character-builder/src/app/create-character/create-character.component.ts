@@ -10,14 +10,15 @@ export interface NewCharacter {
   characterId: number;
 }
 
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CharacterListComponent } from '../character-list/character-list.component';
 
 @Component({
   selector: 'app-create-character',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CharacterListComponent],
   template: `
     <div class="character-form-container">
       <form
@@ -83,12 +84,7 @@ import { CommonModule } from '@angular/common';
 
       <!-- Display the created characters -->
       <div class="display-characters">
-        <h1>Created Characters</h1>
-        <ul>
-          <li *ngFor="let char of characters">
-            {{ char.name }} ({{ char.gender }}, {{ char.class }})
-          </li>
-        </ul>
+        <app-character-list [characters]="characters"></app-character-list>
       </div>
     </div>
   `,
@@ -159,18 +155,6 @@ import { CommonModule } from '@angular/common';
       background-color: #f44336;
       color: white;
       border: none;
-    }
-
-    .character-summary ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .character-summary li {
-      margin-bottom: 10px;
-      padding: 5px;
-      background-color: #f9f9f9;
-      border-left: 4px solid #4caf50;
     }
   `,
 })
