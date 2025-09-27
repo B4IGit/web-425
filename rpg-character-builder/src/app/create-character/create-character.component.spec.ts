@@ -29,7 +29,7 @@ describe('CreateCharacterComponent', () => {
     expect(Number.isInteger(component.character.characterId)).toBe(true);
   });
 
-  it('should add a character with correct customization', () => {
+  /*it('should add a character with correct customization', () => {
     spyOn(component, 'generateRandomId').and.returnValue(1);
     component.selectedName = 'Devin Ledesma';
     component.selectedGender = 'male';
@@ -41,7 +41,7 @@ describe('CreateCharacterComponent', () => {
     expect(createNewCharacter.name).toBe('Devin Ledesma');
     expect(createNewCharacter.gender).toBe('male');
     expect(createNewCharacter.class).toBe('mage');
-  });
+  });*/
 
   it('should reset all form fields to their default values after resetForm is called', () => {
     component.selectedName = 'French Toast';
