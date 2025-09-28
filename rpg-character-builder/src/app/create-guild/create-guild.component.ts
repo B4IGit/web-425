@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -7,11 +7,12 @@ import {
   FormArray,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { GuildListComponent, Guild } from '../guild-list/guild-list.component';
 
 @Component({
   selector: 'app-create-guild',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, GuildListComponent],
   template: `
     <div class="guild-form-container">
       <form
@@ -63,25 +64,7 @@ import {
       </form>
 
       <div class="guild">
-        <h1>Guild Creations</h1>
-        <div class="guild-container">
-          @for (guild of prexistingGuilds; track guild) {
-            <div class="guild-card">
-              <h2>{{ guild.guildName }}</h2>
-              <p>{{ guild.guildDescription }}</p>
-              <h3>Guild Type</h3>
-              <p>{{ guild.guildType }}</p>
-              <h3>Notification Preference</h3>
-              <p>
-                {{
-                  isArray(guild.guildNotificationPreference)
-                    ? guild.guildNotificationPreference.join(', ')
-                    : guild.guildNotificationPreference
-                }}
-              </p>
-            </div>
-          }
-        </div>
+        <app-guild-list [guilds]="guilds"></app-guild-list>
       </div>
     </div>
   `,
@@ -100,23 +83,6 @@ import {
     .guild {
       width: 100%;
       margin-bottom: 20px;
-    }
-
-    .guild-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .guild-card {
-      flex: 0 0 calc(50% - 20px);
-      box-sizing: border-box;
-      border: 2px solid red;
-      padding: 20px;
-      margin: 10px 0;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     form > fieldset.style-fieldset {
@@ -177,54 +143,55 @@ import {
 export class CreateGuildComponent {
   typeOptions = ['Competitive', 'Casual', 'Social', 'Education'];
   notificationOptions = ['Email', 'SMS', 'In-App'];
-  prexistingGuilds: any;
 
-  // Expose Array.isArray for use in the template
-  readonly isArray = Array.isArray;
+  guilds: Guild[] = [
+    {
+      guildName: 'Divine Flame',
+      guildDescription: 'A guild dedicated to the protection of the flame',
+      guildType: 'Competitive',
+      guildNotificationPreference: 'Email',
+    },
+    {
+      guildName: 'Magical Mystery',
+      guildDescription: 'A guild dedicated to the mystery of magic',
+      guildType: 'Casual',
+      guildNotificationPreference: ['SMS', 'In-App'],
+    },
+    {
+      guildName: 'Warriors of Archery',
+      guildDescription: 'A guild dedicated to the warriors of the Archery',
+      guildType: 'Social',
+      guildNotificationPreference: 'Email',
+    },
+    {
+      guildName: 'The Armory',
+      guildDescription: 'A guild dedicated to the armory',
+      guildType: 'Education',
+      guildNotificationPreference: 'In-App',
+    },
+  ];
+
+  @Output() guildsChange = new EventEmitter<Guild[]>();
 
   guildForm: FormGroup = this.fb.group({
-    guildName: [null, Validators.compose([Validators.required])],
-    guildDescription: [null, Validators.compose([Validators.required])],
-    guildType: [null, Validators.compose([Validators.required])],
-    guildNotificationPreference: [
-      null,
-      Validators.compose([Validators.required]),
-    ],
+    guildName: [null, Validators.required],
+    guildDescription: [null, Validators.required],
+    guildType: [null, Validators.required],
+    guildNotificationPreference: [null, Validators.required],
     guildAcceptTerms: [false, Validators.requiredTrue],
   });
 
-  constructor(private fb: FormBuilder) {
-    this.prexistingGuilds = [
-      {
-        guildName: 'Divine Flame',
-        guildDescription: 'A guild dedicated to the protection of the flame',
-        guildType: 'Competitive',
-        guildNotificationPreference: 'Email',
-      },
-      {
-        guildName: 'Magical Mystery',
-        guildDescription: 'A guild dedicated to the mystery of magic',
-        guildType: 'Casual',
-        guildNotificationPreference: ['SMS', 'In-App'],
-      },
-      {
-        guildName: 'Warriors of Archery',
-        guildDescription: 'A guild dedicated to the warriors of the Archery',
-        guildType: 'Social',
-        guildNotificationPreference: 'Email',
-      },
-      {
-        guildName: 'The Armory',
-        guildDescription: 'A guild dedicated to the armory',
-        guildType: 'Education',
-        guildNotificationPreference: 'In-App',
-      },
-    ];
-  }
+  constructor(private fb: FormBuilder) {}
 
   validFormSubmission() {
-    this.guildForm.valid;
-    this.prexistingGuilds.push(this.guildForm.value);
+    if (!this.guildForm.valid) return;
+
+    const newGuild = this.guildForm.value as Guild;
+    this.guilds.push(newGuild);
+
+    // Emit a copy of the list
+    this.guildsChange.emit([...this.guilds]);
+
     alert('Form submitted successfully!');
   }
 }
