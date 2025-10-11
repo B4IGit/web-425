@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
       </div>
       <div class="hero-img">
         <img
-          src="/assets/dark-character.png"
+          src="/rpg-character-builder/assets/dark-character.png"
           alt="Fictional character created using Adobe Firefly"
         />
       </div>
@@ -29,7 +29,10 @@ import { Component } from '@angular/core';
       <h2>Every Creation Begins With A Class...</h2>
       <div class="flex">
         <div class="card">
-          <img src="/assets/warrior-icon.png" alt="warrior RPG class icon" />
+          <img
+            src="/rpg-character-builder/assets/warrior-icon.png"
+            alt="warrior RPG class icon"
+          />
           <div class="character-text">
             <h3>Warrior</h3>
             <p>
@@ -40,7 +43,10 @@ import { Component } from '@angular/core';
           </div>
         </div>
         <div class="card">
-          <img src="/assets/rogue-icon.png" alt="rogue RPG class icon" />
+          <img
+            src="/rpg-character-builder/assets/rogue-icon.png"
+            alt="rogue RPG class icon"
+          />
           <div class="character-text">
             <h3>Rogue</h3>
             <p>
@@ -52,7 +58,10 @@ import { Component } from '@angular/core';
           </div>
         </div>
         <div class="card">
-          <img src="/assets/mage-icon.png" alt="mage RPG class icon" />
+          <img
+            src="/rpg-character-builder/assets/mage-icon.png"
+            alt="mage RPG class icon"
+          />
           <div class="character-text">
             <h3>Mage</h3>
             <p>
@@ -65,7 +74,10 @@ import { Component } from '@angular/core';
       </div>
       <div class="flex">
         <div class="card">
-          <img src="/assets/hunter-icon.png" alt="hunter RPG class icon" />
+          <img
+            src="/rpg-character-builder/assets/hunter-icon.png"
+            alt="hunter RPG class icon"
+          />
           <div class="character-text">
             <h3>Hunter</h3>
             <p>
@@ -76,7 +88,10 @@ import { Component } from '@angular/core';
           </div>
         </div>
         <div class="card">
-          <img src="/assets/wizard-icon.png" alt="wizard RPG class icon" />
+          <img
+            src="/rpg-character-builder/assets/wizard-icon.png"
+            alt="wizard RPG class icon"
+          />
           <div class="character-text">
             <h3>Wizard</h3>
             <p>
@@ -88,7 +103,10 @@ import { Component } from '@angular/core';
           </div>
         </div>
         <div class="card">
-          <img src="/assets/warlock-icon.png" alt="warlock RPG class icon" />
+          <img
+            src="/rpg-character-builder/assets/warlock-icon.png"
+            alt="warlock RPG class icon"
+          />
           <div class="character-text">
             <h3>Warlock</h3>
             <p>
