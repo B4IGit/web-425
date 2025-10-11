@@ -74,10 +74,7 @@ import { Component } from '@angular/core';
       </div>
       <div class="flex">
         <div class="card">
-          <img
-            src="/rpg-character-builder/assets/hunter-icon.png"
-            alt="hunter RPG class icon"
-          />
+          <img src="/assets/hunter-icon.png" alt="hunter RPG class icon" />
           <div class="character-text">
             <h3>Hunter</h3>
             <p>
@@ -88,10 +85,7 @@ import { Component } from '@angular/core';
           </div>
         </div>
         <div class="card">
-          <img
-            src="/rpg-character-builder/assets/wizard-icon.png"
-            alt="wizard RPG class icon"
-          />
+          <img src="/assets/wizard-icon.png" alt="wizard RPG class icon" />
           <div class="character-text">
             <h3>Wizard</h3>
             <p>
@@ -104,7 +98,7 @@ import { Component } from '@angular/core';
         </div>
         <div class="card">
           <img
-            src="/rpg-character-builder/assets/warlock-icon.png"
+            src="/rpg-character-builder/public/assets/warlock-icon.png"
             alt="warlock RPG class icon"
           />
           <div class="character-text">
