@@ -98,7 +98,7 @@ import { Component } from '@angular/core';
         </div>
         <div class="card">
           <img
-            src="/rpg-character-builder/public/assets/warlock-icon.png"
+            src="/web-425/rpg-character-builder/public/assets/warlock-icon.png"
             alt="warlock RPG class icon"
           />
           <div class="character-text">
