@@ -23,8 +23,8 @@ export class AuthService {
     this.users = [
       {
         userId: 1007,
-        email: 'devin.ledesma@gmail.com',
-        password: 'Devin123',
+        email: 'test@email.com',
+        password: 'Password123',
       },
       {
         userId: 1008,
