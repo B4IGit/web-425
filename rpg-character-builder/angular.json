@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/rpg-character-builder",
-            "baseHref": "/web-425/rpg-character-builder/",
+            "baseHref": "/web-425/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

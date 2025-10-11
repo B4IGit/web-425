@@ -85,7 +85,10 @@ import { Component } from '@angular/core';
           </div>
         </div>
         <div class="card">
-          <img src="/assets/wizard-icon.png" alt="wizard RPG class icon" />
+          <img
+            src="/rpg-character-builder/assets/wizard-icon.png"
+            alt="wizard RPG class icon"
+          />
           <div class="character-text">
             <h3>Wizard</h3>
             <p>
